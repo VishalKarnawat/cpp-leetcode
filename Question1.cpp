@@ -1,42 +1,50 @@
 /*
-	CRED Coins
+Search Insert Position
 
-	For each bill you pay using CRED, you earn
-	X CRED coins.
-	At CodeChef store, each bag is worth
-	100
-	100 CRED coins.
+Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
-	Chef pays
-	Y number of bills using CRED. Find the maximum number of bags he can get from the CodeChef store.
+You must write an algorithm with O(log n) runtime complexity.
 
-	Input Format
-	First line will contain
-	T, number of test cases. Then the test cases follow.
-	Each test case contains of a single line of input, two integers
-	X and
-	Y.
-	Output Format
-	For each test case, output in a single line - the maximum number of bags Chef can get from the CodeChef store.
+Example 1:
 
-	link - https://www.codechef.com/practice/course/logical-problems/DIFF800/problems/CREDCOINS
+Input: nums = [1,3,5,6], target = 5
+Output: 2
+
+Example 2:
+
+Input: nums = [1,3,5,6], target = 2
+Output: 1
+
+LINK - https://leetcode.com/problems/search-insert-position/description/
+
 */
 
-#include <bits/stdc++.h>
-using namespace std;
 
-int main()
+class Solution
 {
-
-	int T, X, Y, total, coins = 100, coinGet;
-	cin >> T;
-
-	while (T--)
+public:
+	int searchInsert(vector<int> &nums, int target)
 	{
-		cin >> X >> Y;
-		total = X * Y;
-		coinGet = total / coins;
-		cout << ceil(coinGet) << endl;
+		int s = 0;
+		int e = nums.size() - 1;
+
+		while (s <= e)
+		{
+			int mid = s + (e - s) / 2;
+
+			if (nums[mid] == target)
+			{
+				return mid;
+			}
+			else if (target > nums[mid])
+			{
+				s = mid + 1;
+			}
+			else
+			{
+				e = mid - 1;
+			}
+		}
+		return s;
 	}
-	return 0;
-}
+};
